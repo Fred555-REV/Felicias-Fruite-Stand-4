@@ -12,4 +12,12 @@ public class Product {
     public double getCost() {
         return cost;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getSubtype() {
+        return subtype;
+    }
 }

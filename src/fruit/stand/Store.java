@@ -22,21 +22,41 @@ public class Store {
     public void sell(Product product, Person person) {
         if (person.pay(product.getCost())) {
             setBalance(balance + product.getCost());
-            switch (product.getClass().getSimpleName().toLowerCase(Locale.ROOT)) {
-                case "fruit":
-                    fruits.remove(product);
-                    break;
-                case "meat":
-                    meats.remove(product);
-                    break;
-            }
+            remove(product);
         } else {
             System.out.println("Not enough cash");
         }
     }
 
-    private void setFruits(List<Fruit> fruits) {
-        this.fruits = fruits;
+    public void buy(Product product) {
+        if (product.getCost() > balance) {
+            System.out.println("Not enough money to buy \ntype:" + product.getType() + "\nsubtype:" + product.getType());
+        } else {
+            setBalance(balance - product.getCost());
+            add(product);
+        }
+    }
+
+    private void remove(Product product) {
+        switch (product.getClass().getSimpleName().toLowerCase(Locale.ROOT)) {
+            case "fruit":
+                fruits.remove((Fruit) product);
+                break;
+            case "meat":
+                meats.remove((Meat) product);
+                break;
+        }
+    }
+
+    private void add(Product product) {
+        switch (product.getClass().getSimpleName().toLowerCase(Locale.ROOT)) {
+            case "fruit":
+                fruits.add((Fruit) product);
+                break;
+            case "meat":
+                meats.add((Meat) product);
+                break;
+        }
     }
 
     public List<Fruit> getFruits() {
