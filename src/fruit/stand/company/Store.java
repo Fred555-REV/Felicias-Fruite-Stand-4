@@ -1,5 +1,6 @@
-package fruit.stand;
+package fruit.stand.company;
 
+import fruit.stand.Transaction;
 import fruit.stand.people.Cashier;
 import fruit.stand.people.Person;
 import fruit.stand.products.Fruit;
