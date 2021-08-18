@@ -15,14 +15,15 @@ public class Farm {
     public Farm() {
         this.fruits = new ArrayList<>();
         this.meats = new ArrayList<>();
-        addFruit("Apple");
-        addFruit("Banana");
-        addFruit("Orange");
+        addFruit("Apple", "Gala", 1.5, 20);
+        addFruit("Apple", "Fuji", 2.5, 15);
+        addFruit("Orange", "Blood", 1.75, 25);
+        addFruit("Orange", "Cara Cara", 2, 23);
         addMeat("Chicken");
     }
 
-    private void addFruit(String name) {
-//        fruits.add(new Fruit(name, 12);
+    private void addFruit(String name, String subType, double cost, int amount) {
+        //fruit , name, subtype, expDate, cost, amount
     }
 
     private void addMeat(String name) {

@@ -1,5 +1,6 @@
 package fruit.stand;
 
+import fruit.stand.company.Console;
 import fruit.stand.company.Store;
 import fruit.stand.people.Cashier;
 import fruit.stand.people.Customer;
@@ -13,6 +14,7 @@ public class Main {
         Console console = new Console(wallMart, cashier);
         while (true) {
             console.menu();
+            console.takeAction();
 
         }
 

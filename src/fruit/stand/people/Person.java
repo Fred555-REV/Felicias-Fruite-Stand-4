@@ -1,8 +1,8 @@
 package fruit.stand.people;
 
 public class Person {
-    private String name;
-    private double cash;
+    protected String name;
+    protected double cash;
 
     public Person(String name, double cash) {
         this.name = name;

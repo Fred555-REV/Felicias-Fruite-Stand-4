@@ -16,7 +16,7 @@ public class Store {
     private double balance;
     private List<Fruit> fruits;
     private List<Meat> meats;
-    private List<Transaction> pendingTransactions;
+    protected List<Transaction> pendingTransactions;
 
     public Store(double balance) {
         this.balance = balance;
@@ -26,7 +26,7 @@ public class Store {
     }
 
 
-    public void hire(Cashier cashier) {
+    protected void hire(Cashier cashier) {
         if (this.cashier == null) {
             setCashier(cashier);
         }
@@ -55,7 +55,7 @@ public class Store {
 
     private void buy(Product product) {
         if (product.getCost() > balance) {
-            System.out.println("Not enough money to buy \ntype:" + product.getType() + "\nsubtype:" + product.getType());
+            System.out.println("Not enough money to buy \nname:" + product.getName() + "\ntype:" + product.getType());
         } else {
             setBalance(balance - product.getCost());
             add(product);
@@ -93,7 +93,16 @@ public class Store {
         }
     }
 
-    private List<Fruit> getFruits() {
+    protected void displayProducts() {
+        System.out.println(getFruits());
+        System.out.println(getMeats());
+    }
+
+    protected List<Meat> getMeats() {
+        return meats;
+    }
+
+    protected List<Fruit> getFruits() {
         return fruits;
     }
 }

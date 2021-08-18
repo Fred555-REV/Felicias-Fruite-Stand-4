@@ -9,4 +9,16 @@ public class Meat extends Product {
         super(type, subtype, expDate, cost, amount);
         this.cookLevel = cookLevel;
     }
+
+    @Override
+    public String toString() {
+        return "Meat{" +
+                "\n\tcookLevel='" + cookLevel + '\'' +
+                "\n\tname='" + name + '\'' +
+                "\n\ttype='" + type + '\'' +
+                "\n\texpDate=" + expDate +
+                "\n\tcost=" + cost +
+                "\n\tamount=" + amount +
+                "\n" + '}' + "\n";
+    }
 }
