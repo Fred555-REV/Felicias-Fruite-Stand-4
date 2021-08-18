@@ -1,25 +1,49 @@
 package fruit.stand;
 
+import fruit.stand.people.Cashier;
+import fruit.stand.people.Person;
+import fruit.stand.products.Fruit;
+import fruit.stand.products.Meat;
+import fruit.stand.products.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class Store {
+    private Cashier cashier;
     private double balance;
     private List<Fruit> fruits;
     private List<Meat> meats;
+    private List<Transaction> pendingTransactions;
 
     public Store(double balance) {
         this.balance = balance;
         this.fruits = new ArrayList<>();
         this.meats = new ArrayList<>();
+        this.pendingTransactions = new ArrayList<>();
     }
 
-    private void setBalance(double balance) {
-        this.balance = balance;
+
+    public void hire(Cashier cashier) {
+        if (this.cashier == null) {
+            setCashier(cashier);
+        }
     }
 
-    public void sell(Product product, Person person) {
+    public void takePendingTransactions() {
+        for (Transaction transaction : pendingTransactions) {
+            if (transaction.getTo().getName().equals(cashier.getName())) {
+                sell(transaction.getProduct(), transaction.getFrom());
+            } else if (transaction.getFrom().getName().equals(cashier.getName())) {
+                for (int i = 0; i < transaction.getAmount(); i++) {
+                    buy(transaction.getProduct());
+                }
+            }
+        }
+    }
+
+    private void sell(Product product, Person person) {
         if (person.pay(product.getCost())) {
             setBalance(balance + product.getCost());
             remove(product);
@@ -28,7 +52,7 @@ public class Store {
         }
     }
 
-    public void buy(Product product) {
+    private void buy(Product product) {
         if (product.getCost() > balance) {
             System.out.println("Not enough money to buy \ntype:" + product.getType() + "\nsubtype:" + product.getType());
         } else {
@@ -36,6 +60,15 @@ public class Store {
             add(product);
         }
     }
+
+    private void setCashier(Cashier cashier) {
+        this.cashier = cashier;
+    }
+
+    private void setBalance(double balance) {
+        this.balance = balance;
+    }
+
 
     private void remove(Product product) {
         switch (product.getClass().getSimpleName().toLowerCase(Locale.ROOT)) {
@@ -59,7 +92,7 @@ public class Store {
         }
     }
 
-    public List<Fruit> getFruits() {
+    private List<Fruit> getFruits() {
         return fruits;
     }
 }

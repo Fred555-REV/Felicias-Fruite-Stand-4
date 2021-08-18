@@ -1,4 +1,4 @@
-package fruit.stand;
+package fruit.stand.people;
 
 public class Person {
     private String name;

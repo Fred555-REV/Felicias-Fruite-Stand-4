@@ -1,10 +1,13 @@
 package fruit.stand;
 
-import java.util.List;
+import fruit.stand.people.Cashier;
+
+import java.util.Scanner;
 
 public class Console {
     private Store store;
     private Cashier cashier;
+    private static Scanner scan;
 
     public Console(Store store, Cashier cashier) {
         this.store = store;
@@ -12,10 +15,10 @@ public class Console {
     }
 
     public void menu() {
-        System.out.println("Welcome "+ cashier.getName());
+        System.out.println("Welcome " + cashier.getName());
         System.out.println("(1) Stock the store");
-        System.out.println("");
-        System.out.println("");
+        System.out.println("(2) check and throw away expired products");
+        System.out.println("(3) Check for orders");
         System.out.println("");
     }
 

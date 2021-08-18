@@ -1,4 +1,4 @@
-package fruit.stand;
+package fruit.stand.products;
 
 import java.util.Date;
 
