@@ -24,6 +24,7 @@ public class Console {
     private final Scanner scan = new Scanner(System.in);
     private int hour;
     private String minutes;
+    private boolean isShiftOver;
 
     public Console(Store store, Cashier cashier, Farm farm, List<Customer> customers) {
         this.store = store;
@@ -33,6 +34,7 @@ public class Console {
         this.customers = customers;
         hour = 8;
         minutes = ":30";
+        isShiftOver = false;
     }
 
     public void menu() {
@@ -48,7 +50,8 @@ public class Console {
         System.out.println("Welcome " + cashier.getName() + " The store has $" + store.getBalance());
         System.out.println("It is " + hour + minutes);
         System.out.println("There are " + store.pendingTransactions.size() + " transactions pending.");
-        if (hour == 5) {
+        if (hour == 5 || isShiftOver) {
+            isShiftOver = true;
             System.out.println("(0) You can end your shift now.");
         }
         System.out.println("(1) Order a product for the store.");
@@ -62,7 +65,7 @@ public class Console {
         int choice = Validation.inputInt("What will you do?");
         switch (choice) {
             case 0:
-                if (hour == 5) {
+                if (isShiftOver) {
                     System.out.println("Good bye");
                     System.exit(200);
                 } else {
