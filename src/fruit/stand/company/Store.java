@@ -136,6 +136,10 @@ public class Store {
         }
     }
 
+    protected List<Transaction> getTransactionHistory() {
+        return transactionHistory;
+    }
+
     protected void displayProducts() {
         System.out.println(getFruits());
         System.out.println(getMeats());

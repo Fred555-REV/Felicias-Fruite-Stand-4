@@ -70,6 +70,7 @@ public class Console {
         } else {
             System.out.print("off)\n");
         }
+        System.out.println("(7) Show transaction history");
     }
 
     public void takeAction() {
@@ -103,6 +104,9 @@ public class Console {
                 break;
             case 6:
                 isAutomatic = true;
+                break;
+            case 7:
+                System.out.println(store.getTransactionHistory());
                 break;
             default:
                 takeAction();
