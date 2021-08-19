@@ -17,12 +17,14 @@ public class Store {
     private List<Fruit> fruits;
     private List<Meat> meats;
     protected List<Transaction> pendingTransactions;
+    private List<Transaction> transactionHistory;
 
     public Store(double balance) {
         this.balance = balance;
         this.fruits = new ArrayList<>();
         this.meats = new ArrayList<>();
         this.pendingTransactions = new ArrayList<>();
+        this.transactionHistory = new ArrayList<>();
     }
 
 
@@ -35,7 +37,10 @@ public class Store {
     protected void handlePendingtransactions() {
         for (Transaction transaction : pendingTransactions) {
             if (transaction.getTo().getName().equals(cashier.getName())) {
-                sell(transaction.getProduct(), transaction.getFrom());
+                if (sell(transaction.getProduct(), transaction.getFrom())) {
+                    transactionHistory.add(transaction);
+                    pendingTransactions.remove(transaction);
+                }
             } else if (transaction.getFrom().getName().equals(cashier.getName())) {
                 for (int i = 0; i < transaction.getAmount(); i++) {
                     buy(transaction.getProduct());
@@ -48,21 +53,25 @@ public class Store {
         pendingTransactions.add(transaction);
     }
 
-    private void sell(Product product, Person person) {
+    private Boolean sell(Product product, Person person) {
         if (person.pay(product.getCost())) {
             setBalance(balance + product.getCost());
             remove(product);
+            return true;
         } else {
-            System.out.println("Not enough cash");
+            System.out.println(person.getName() + " does not have enough cash try again later.");
+            return false;
         }
     }
 
-    private void buy(Product product) {
+    private boolean buy(Product product) {
         if (product.getCost() > balance) {
             System.out.println("Not enough money to buy \nname:" + product.getName() + "\ntype:" + product.getType());
+            return false;
         } else {
             setBalance(balance - product.getCost());
             add(product);
+            return true;
         }
     }
 

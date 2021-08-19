@@ -9,6 +9,7 @@ import fruit.stand.products.Fruit;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 public class Main {
 
@@ -16,12 +17,14 @@ public class Main {
         Farm stateFarm = new Farm();
         Store wallMart = new Store(500);
         Cashier cashier = new Cashier("Karl", 500);
-        Customer customer = new Customer("Freddy", 50);
-        Console console = new Console(wallMart, cashier, stateFarm);
+        Customer customer1 = new Customer("Freddy", 50);
+        Customer customer2 = new Customer("Bob", 50);
+        Customer customer3 = new Customer("Karl", 50);
+        List<Customer> customers = List.of(customer1, customer2, customer3);
+        Console console = new Console(wallMart, cashier, stateFarm, customers);
         while (true) {
             console.menu();
             console.takeAction();
-
         }
 
 

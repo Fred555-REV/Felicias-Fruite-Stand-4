@@ -1,13 +1,18 @@
 package fruit.stand.products;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Meat extends Product {
     private String cookLevel;   //raw,rare,wellDone
 
-    public Meat(String name, String type, Date expDate, double cost, int amount, String cookLevel) {
+    public Meat(String name, String type, LocalDate expDate, double cost, int amount, String cookLevel) {
         super(name, type, expDate, cost, amount);
         this.cookLevel = cookLevel;
+    }
+
+    public String getCookLevel() {
+        return cookLevel;
     }
 
     @Override

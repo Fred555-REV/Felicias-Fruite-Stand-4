@@ -1,15 +1,16 @@
 package fruit.stand.products;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Product {
     protected String name;
     protected String type; //specific is like gala or wing
-    protected Date expDate;
+    protected LocalDate expDate;
     protected double cost;
     protected int amount;
 
-    public Product(String name, String type, Date expDate, double cost, int amount) {
+    public Product(String name, String type, LocalDate expDate, double cost, int amount) {
         this.name = name;
         this.type = type;
         this.expDate = expDate;
@@ -17,7 +18,7 @@ public class Product {
         this.amount = amount;
     }
 
-    public Date getExpDate() {
+    public LocalDate getExpDate() {
         return expDate;
     }
 
@@ -35,6 +36,10 @@ public class Product {
 
     public int getAmount() {
         return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override
