@@ -25,6 +25,7 @@ public class Console {
     private int hour;
     private String minutes;
     private boolean isShiftOver;
+    private boolean isAutomatic;
 
     public Console(Store store, Cashier cashier, Farm farm, List<Customer> customers) {
         this.store = store;
@@ -35,6 +36,7 @@ public class Console {
         hour = 8;
         minutes = ":30";
         isShiftOver = false;
+        isAutomatic = false;
     }
 
     public void menu() {
@@ -47,9 +49,15 @@ public class Console {
         } else if (minutes.equalsIgnoreCase(":00")) {
             minutes = ":30";
         }
-        System.out.println("Welcome " + cashier.getName() + " The store has $" + store.getBalance());
+        System.out.println("Welcome " + cashier.getName());
         System.out.println("It is " + hour + minutes);
-        System.out.println("There are " + store.pendingTransactions.size() + " transactions pending.");
+        if (isAutomatic) {
+            System.out.println("Automatically handling transactions.");
+            store.handlePendingtransactions();
+        } else {
+            System.out.println("There are " + store.pendingTransactions.size() + " transactions pending.");
+        }
+        System.out.println("The Fruite Stand has $" + store.getBalance());
         if (hour == 5 || isShiftOver) {
             isShiftOver = true;
             System.out.println("(0) You can end your shift now.");
@@ -59,6 +67,12 @@ public class Console {
         System.out.println("(3) Check for expired items.");
         System.out.println("(4) Handle pending transactions");
         System.out.println("(5) Take inventory of products");
+        System.out.print("(6) Handle transactions automatically (toggle is ");
+        if (isAutomatic) {
+            System.out.print("on)\n");
+        } else {
+            System.out.print("off)\n");
+        }
     }
 
     public void takeAction() {
@@ -88,8 +102,10 @@ public class Console {
                 store.handlePendingtransactions();
                 break;
             case 5:
-                System.out.println(store.getFruits());
-                System.out.println(store.getMeats());
+                store.displayProducts();
+                break;
+            case 6:
+                isAutomatic = true;
                 break;
             default:
                 takeAction();
@@ -98,7 +114,7 @@ public class Console {
     }
 
     private void takeOrder() {
-        int customerIndex = (int) Math.floor(Math.random() * 3) + 1;
+        int customerIndex = (int) Math.floor(Math.random() * 3);
         Customer current = customers.get(customerIndex);
         System.out.println(current);
         int productType = (int) Math.floor(Math.random() * 2) + 1;
@@ -112,7 +128,7 @@ public class Console {
                     product = store.getFruits().get(randomIndex);
                     product = new Fruit(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getFruits().get(randomIndex).getColor());
                     amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
-                    System.out.println(current.getName() + " orders " + amount);
+                    System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + product.getCost());
                 } else {
                     System.out.println("Customer left because there were no fruits.");
                 }
@@ -123,7 +139,7 @@ public class Console {
                     product = store.getMeats().get(randomIndex);
                     product = new Meat(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getMeats().get(randomIndex).getCookLevel());
                     amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
-                    System.out.println(current.getName() + " orders " + amount);
+                    System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + product.getCost());
                 } else {
                     System.out.println("Customer left because there were no meats.");
                 }
@@ -161,7 +177,7 @@ public class Console {
         }
         if (product != null) {
             System.out.println("Store has $" + store.getBalance());
-            int amount = Validation.inputInt("How many 1-5?", 1, 5);
+            int amount = Validation.inputInt("How many 1-10?", 1, 10);
             product.setAmount(amount);
             store.addTransaction(new Transaction(product.getCost() * amount, cashier, farm.getFarmer(), product));
         }

@@ -57,14 +57,14 @@ public class Farm {
 
     protected void displayFruits() {
         for (Fruit fruit : fruits) {
-            System.out.printf("Name: %s\tType: %s\tCost: %s\tColor: %s",
+            System.out.printf("Name: %s\tType: %s\tCost: %s\tColor: %s\n",
                     fruit.getName(), fruit.getType(), fruit.getCost(), fruit.getColor());
         }
     }
 
     protected void displayMeats() {
         for (Meat meat : meats) {
-            System.out.printf("Name: %s\tType: %s\tCost: %s\tCookLevel: %s",
+            System.out.printf("Name: %s\tType: %s\tCost: %s\tCookLevel: %s\n",
                     meat.getName(), meat.getType(), meat.getCost(), meat.getCookLevel());
         }
     }

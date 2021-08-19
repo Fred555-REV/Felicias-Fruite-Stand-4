@@ -74,7 +74,7 @@ public class Store {
             case "fruit":
                 for (Fruit fruit : fruits) {
                     if (fruit.getType().equals(product.getType()) && fruit.getExpDate() == product.getExpDate()) {
-                        fruit.setAmount(product.getAmount());
+                        fruit.setAmount(fruit.getAmount() - product.getAmount());
                         if (fruit.getAmount() < 1) {
                             fruits.remove(fruit);
                         }
@@ -85,7 +85,7 @@ public class Store {
             case "meat":
                 for (Meat meat : meats) {
                     if (meat.getType().equals(product.getType()) && meat.getExpDate() == product.getExpDate()) {
-                        meat.setAmount(product.getAmount());
+                        meat.setAmount(meat.getAmount() - product.getAmount());
                         if (meat.getAmount() < 1) {
                             meats.remove(meat);
                         }
