@@ -8,10 +8,7 @@ import fruit.stand.products.Fruit;
 import fruit.stand.products.Meat;
 import fruit.stand.products.Product;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -128,7 +125,7 @@ public class Console {
                     product = store.getFruits().get(randomIndex);
                     product = new Fruit(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getFruits().get(randomIndex).getColor());
                     amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
-                    System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + product.getCost());
+                    System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + (product.getCost() * store.getPricePercent()));
                 } else {
                     System.out.println("Customer left because there were no fruits.");
                 }
@@ -139,7 +136,7 @@ public class Console {
                     product = store.getMeats().get(randomIndex);
                     product = new Meat(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getMeats().get(randomIndex).getCookLevel());
                     amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
-                    System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + product.getCost());
+                    System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + (product.getCost() * store.getPricePercent()));
                 } else {
                     System.out.println("Customer left because there were no meats.");
                 }
@@ -149,7 +146,7 @@ public class Console {
                 break;
         }
         if (product != null) {
-            store.addTransaction(new Transaction((product.getCost() * amount), current, cashier, product));
+            store.addTransaction(new Transaction(((product.getCost() * store.getPricePercent()) * amount), current, cashier, product));
         }
     }
 

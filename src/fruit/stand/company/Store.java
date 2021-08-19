@@ -18,6 +18,7 @@ public class Store {
     private final List<Meat> meats;
     protected List<Transaction> pendingTransactions;
     private final List<Transaction> transactionHistory;
+    private final double pricePercent;
 
     public Store(double balance) {
         this.balance = balance;
@@ -25,6 +26,7 @@ public class Store {
         this.meats = new ArrayList<>();
         this.pendingTransactions = new ArrayList<>();
         this.transactionHistory = new ArrayList<>();
+        this.pricePercent = .25;
     }
 
 
@@ -130,6 +132,10 @@ public class Store {
     protected void displayProducts() {
         System.out.println(getFruits());
         System.out.println(getMeats());
+    }
+
+    protected double getPricePercent() {
+        return pricePercent;
     }
 
     protected List<Meat> getMeats() {
