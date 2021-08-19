@@ -19,11 +19,11 @@ public class Fruit extends Product {
     public String toString() {
         return "\nFruit{" +
                 "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", color='" + color + '\'' +
-                ", expDate=" + expDate +
-                ", cost=" + cost +
-                ", amount=" + amount +
+                ",\ttype='" + type + '\'' +
+                ",\tcolor='" + color + '\'' +
+                ",\texpDate=" + expDate +
+                ",\tcost=" + cost +
+                ",\tamount=" + amount +
                 '}';
     }
 }
