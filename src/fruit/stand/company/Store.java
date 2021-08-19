@@ -7,6 +7,7 @@ import fruit.stand.products.Fruit;
 import fruit.stand.products.Meat;
 import fruit.stand.products.Product;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -59,14 +60,20 @@ public class Store {
     }
 
     private Boolean sell(Product product, Person person, double cost) {
-        if (person.pay(product.getCost())) {
+        if (person.pay(product.getCost()) && product.getExpDate().isAfter(LocalDate.now())) {
             setBalance(balance + product.getCost());
             //how much the customer paid divided by how much it costs = amount
             product.setAmount((int) (cost / product.getCost()));
             remove(product);
             return true;
         } else {
-            System.out.println(person.getName() + " does not have enough cash try again later.");
+            if (product.getExpDate().isAfter(LocalDate.now())) {
+                int sueCharge = (int) Math.floor(Math.random() * (balance / 2)) + 1;
+                System.out.println("Product is expired customer sued for $" + sueCharge);
+                balance -= sueCharge;
+            } else {
+                System.out.println(person.getName() + " does not have enough cash try again later.");
+            }
             return false;
         }
     }
