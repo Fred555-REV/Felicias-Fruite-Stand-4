@@ -5,6 +5,7 @@ import fruit.stand.Validation;
 import fruit.stand.people.Cashier;
 import fruit.stand.people.Customer;
 import fruit.stand.products.Fruit;
+import fruit.stand.products.Meat;
 import fruit.stand.products.Product;
 
 import java.time.Instant;
@@ -84,7 +85,8 @@ public class Console {
                 store.handlePendingtransactions();
                 break;
             case 5:
-                store.displayProducts();
+                System.out.println(store.getFruits());
+                System.out.println(store.getMeats());
                 break;
             default:
                 takeAction();
@@ -95,20 +97,40 @@ public class Console {
     private void takeOrder() {
         int customerIndex = (int) Math.floor(Math.random() * 3) + 1;
         Customer current = customers.get(customerIndex);
+        System.out.println(current);
         int productType = (int) Math.floor(Math.random() * 2) + 1;
         int randomIndex;
-        int amount;
-        Product product;
+        int amount = 0;
+        Product product = null;
         switch (productType) {
             case 1:
-                randomIndex = (int) Math.floor(Math.random() * store.getFruits().size()) + 1;
-                product = store.getFruits().get(randomIndex);
-                amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
-                System.out.println(current.getName() + " orders " + amount);
+                if (store.getFruits().size() > 0) {
+                    randomIndex = (int) Math.floor(Math.random() * store.getFruits().size());
+                    product = store.getFruits().get(randomIndex);
+                    product = new Fruit(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getFruits().get(randomIndex).getColor());
+                    amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
+                    System.out.println(current.getName() + " orders " + amount);
+                } else {
+                    System.out.println("Customer left because there were no fruits.");
+                }
                 break;
             case 2:
-                randomIndex = (int) Math.floor(Math.random() * store.getMeats().size()) + 1;
-                System.out.println(current.getName() + " orders ");
+                if (store.getMeats().size() > 0) {
+                    randomIndex = (int) Math.floor(Math.random() * store.getMeats().size());
+                    product = store.getMeats().get(randomIndex);
+                    product = new Meat(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getMeats().get(randomIndex).getCookLevel());
+                    amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
+                    System.out.println(current.getName() + " orders " + amount);
+                } else {
+                    System.out.println("Customer left because there were no meats.");
+                }
+                break;
+            default:
+                takeOrder();
+                break;
+        }
+        if (product != null) {
+            store.addTransaction(new Transaction((product.getCost() * amount), current, cashier, product));
         }
     }
 

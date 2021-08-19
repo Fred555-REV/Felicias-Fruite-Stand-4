@@ -14,10 +14,10 @@ import java.util.Locale;
 public class Store {
     private Cashier cashier;
     private double balance;
-    private List<Fruit> fruits;
-    private List<Meat> meats;
+    private final List<Fruit> fruits;
+    private final List<Meat> meats;
     protected List<Transaction> pendingTransactions;
-    private List<Transaction> transactionHistory;
+    private final List<Transaction> transactionHistory;
 
     public Store(double balance) {
         this.balance = balance;
@@ -35,32 +35,64 @@ public class Store {
     }
 
     protected void handlePendingtransactions() {
+        List<Transaction> transactionsToRemove = new ArrayList<>();
         for (Transaction transaction : pendingTransactions) {
             if (transaction.getTo().getName().equals(cashier.getName())) {
-                if (sell(transaction.getProduct(), transaction.getFrom())) {
+                if (sell(transaction.getProduct(), transaction.getFrom(), transaction.getAmount())) {
                     transactionHistory.add(transaction);
-                    pendingTransactions.remove(transaction);
+                    transactionsToRemove.add(transaction);
                 }
             } else if (transaction.getFrom().getName().equals(cashier.getName())) {
-                for (int i = 0; i < transaction.getAmount(); i++) {
-                    buy(transaction.getProduct());
+                if (buy(transaction.getProduct())) {
+                    transactionHistory.add(transaction);
+                    transactionsToRemove.add(transaction);
                 }
             }
         }
+        pendingTransactions.removeAll(transactionsToRemove);
     }
 
     protected void addTransaction(Transaction transaction) {
         pendingTransactions.add(transaction);
     }
 
-    private Boolean sell(Product product, Person person) {
+    private Boolean sell(Product product, Person person, double cost) {
         if (person.pay(product.getCost())) {
             setBalance(balance + product.getCost());
+            //how much the customer paid divided by how much it costs = amount
+            product.setAmount((int) (cost / product.getCost()));
             remove(product);
             return true;
         } else {
             System.out.println(person.getName() + " does not have enough cash try again later.");
             return false;
+        }
+    }
+
+    private void remove(Product product) {
+        switch (product.getClass().getSimpleName().toLowerCase(Locale.ROOT)) {
+            case "fruit":
+                for (Fruit fruit : fruits) {
+                    if (fruit.getType().equals(product.getType()) && fruit.getExpDate() == product.getExpDate()) {
+                        fruit.setAmount(product.getAmount());
+                        if (fruit.getAmount() < 1) {
+                            fruits.remove(fruit);
+                        }
+                        break;
+                    }
+                }
+                break;
+            case "meat":
+                for (Meat meat : meats) {
+                    if (meat.getType().equals(product.getType()) && meat.getExpDate() == product.getExpDate()) {
+                        meat.setAmount(product.getAmount());
+                        if (meat.getAmount() < 1) {
+                            meats.remove(meat);
+                        }
+                        break;
+                    }
+                }
+                break;
         }
     }
 
@@ -83,17 +115,6 @@ public class Store {
         this.balance = balance;
     }
 
-
-    private void remove(Product product) {
-        switch (product.getClass().getSimpleName().toLowerCase(Locale.ROOT)) {
-            case "fruit":
-                fruits.remove((Fruit) product);
-                break;
-            case "meat":
-                meats.remove((Meat) product);
-                break;
-        }
-    }
 
     private void add(Product product) {
         switch (product.getClass().getSimpleName().toLowerCase(Locale.ROOT)) {
