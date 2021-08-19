@@ -26,7 +26,7 @@ public class Store {
         this.meats = new ArrayList<>();
         this.pendingTransactions = new ArrayList<>();
         this.transactionHistory = new ArrayList<>();
-        this.pricePercent = .25;
+        this.pricePercent = 1.25;
     }
 
 
