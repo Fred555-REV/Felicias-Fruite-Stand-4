@@ -32,7 +32,7 @@ public class Store {
         }
     }
 
-    public void takePendingTransactions() {
+    protected void handlePendingtransactions() {
         for (Transaction transaction : pendingTransactions) {
             if (transaction.getTo().getName().equals(cashier.getName())) {
                 sell(transaction.getProduct(), transaction.getFrom());
@@ -42,6 +42,10 @@ public class Store {
                 }
             }
         }
+    }
+
+    protected void addTransaction(Transaction transaction) {
+        pendingTransactions.add(transaction);
     }
 
     private void sell(Product product, Person person) {
@@ -104,5 +108,9 @@ public class Store {
 
     protected List<Fruit> getFruits() {
         return fruits;
+    }
+
+    protected double getBalance() {
+        return balance;
     }
 }

@@ -13,13 +13,13 @@ public class Fruit extends Product {
 
     @Override
     public String toString() {
-        return "Fruit{" +
-                "\n\tcolor='" + color + '\'' +
-                "\n\tname='" + name + '\'' +
-                "\n\ttype='" + type + '\'' +
-                "\n\texpDate=" + expDate +
-                "\n\tcost=" + cost +
-                "\n\tamount=" + amount +
-                "\n" + '}' + "\n";
+        return "\nFruit{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", color='" + color + '\'' +
+                ", expDate=" + expDate +
+                ", cost=" + cost +
+                ", amount=" + amount +
+                '}';
     }
 }

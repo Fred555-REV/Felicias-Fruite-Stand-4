@@ -34,10 +34,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "\nTransaction{" +
                 "amount=" + amount +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
+                ", from='" + from.getName() + '\'' +
+                ", to='" + to.getName() + '\'' +
                 ", product=" + product +
                 '}';
     }

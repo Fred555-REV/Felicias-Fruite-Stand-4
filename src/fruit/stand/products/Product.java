@@ -32,4 +32,19 @@ public class Product {
     public String getType() {
         return type;
     }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", expDate=" + expDate +
+                ", cost=" + cost +
+                ", amount=" + amount +
+                '}';
+    }
 }
