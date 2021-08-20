@@ -1,6 +1,6 @@
 package fruit.stand.people;
 
-import fruit.stand.Transaction;
+import fruit.stand.company.Transaction;
 
 public class Person {
     protected String name;
@@ -11,22 +11,14 @@ public class Person {
         this.cash = cash;
     }
 
-    public double getCash() {
-        return cash;
-    }
-
     public String getName() {
         return name;
-    }
-
-    private void setCash(double cash) {
-        this.cash = cash;
     }
 
     public void pay(Transaction transaction) {
         if ((transaction.getProduct().getCost() * transaction.getAmount()) > cash) {
             return;
         }
-        setCash(cash - transaction.getProduct().getCost());
+        cash -= transaction.getProduct().getCost();
     }
 }

@@ -1,4 +1,4 @@
-package fruit.stand;
+package fruit.stand.company;
 
 import fruit.stand.people.Person;
 import fruit.stand.products.Product;
@@ -9,7 +9,7 @@ public class Transaction {
     private Person to;
     private Product product;
 
-    public Transaction(int amount, Person from, Person to, Product product) {
+    protected Transaction(int amount, Person from, Person to, Product product) {
         this.amount = amount;
         this.from = from;
         this.to = to;

@@ -1,12 +1,9 @@
 package fruit.stand.company;
 
-import fruit.stand.Transaction;
 import fruit.stand.Validation;
 import fruit.stand.people.Cashier;
 import fruit.stand.people.Customer;
 import fruit.stand.products.Farm;
-import fruit.stand.products.Fruit;
-import fruit.stand.products.Meat;
 import fruit.stand.products.Product;
 
 import java.time.LocalDate;

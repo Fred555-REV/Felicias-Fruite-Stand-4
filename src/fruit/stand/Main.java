@@ -24,6 +24,13 @@ public class Main {
             console.takeAction();
         }
 
+//        stateFarm;
+//        fruiteStand;
+//        cashier;
+//        customer1;
+//        customer2;
+//        customer3;
+//        console;
 
     }
 }
