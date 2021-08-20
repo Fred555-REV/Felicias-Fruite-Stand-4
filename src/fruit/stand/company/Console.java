@@ -187,7 +187,8 @@ public class Console {
 
     private void tossExpiredProducts() {
         store.displayProducts();
-        store.getFruits().removeIf(fruit -> fruit.getExpDate().isAfter(LocalDate.now()));
+        store.getFruits().removeIf(fruit -> fruit.getExpDate().isBefore(LocalDate.from(LocalDate.now())));
+        store.getMeats().removeIf(meat -> meat.getExpDate().isBefore(LocalDate.from(LocalDate.now())));
     }
 
     private Cashier getCashier() {
