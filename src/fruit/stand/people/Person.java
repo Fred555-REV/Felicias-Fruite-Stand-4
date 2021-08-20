@@ -23,11 +23,10 @@ public class Person {
         this.cash = cash;
     }
 
-    public boolean pay(Transaction transaction) {
-        if (transaction.getFrom().getName().equals(name) && transaction.getProduct().getCost() * transaction.getAmount() > cash) {
-            return false;
+    public void pay(Transaction transaction) {
+        if ((transaction.getProduct().getCost() * transaction.getAmount()) > cash) {
+            return;
         }
-        setCash(cash - transaction.getAmount());
-        return true;
+        setCash(cash - transaction.getProduct().getCost());
     }
 }

@@ -41,12 +41,11 @@ public class Store {
         List<Transaction> transactionsToRemove = new ArrayList<>();
         for (Transaction transaction : pendingTransactions) {
             if (transaction.getTo().getName().equals(cashier.getName())) {
-                if (sell(transaction)) {
-                    transactionHistory.add(transaction);
-                    transactionsToRemove.add(transaction);
-                }
+                sell(transaction);
+                transactionHistory.add(transaction);
+                transactionsToRemove.add(transaction);
             } else if (transaction.getFrom().getName().equals(cashier.getName())) {
-                if (buy(transaction.getProduct())) {
+                (buy(transaction.getProduct())) {
                     transactionHistory.add(transaction);
                     transactionsToRemove.add(transaction);
                 }
@@ -59,22 +58,25 @@ public class Store {
         pendingTransactions.add(transaction);
     }
 
-    private Boolean sell(Transaction transaction) {
-        if (transaction.getFrom().pay(transaction) && transaction.getProduct().getExpDate().isAfter(LocalDate.now())) {
-            setBalance(balance + transaction.getProduct().getCost());
+    private void sell(Transaction transaction) {
+        if (transaction.getProduct().getExpDate().isAfter(LocalDate.now())) {
+            transaction.getFrom().pay(transaction);
+            setBalance(balance + (transaction.getProduct().getCost() * transaction.getAmount()));
             //how much the customer paid divided by how much it costs = amount
             transaction.getProduct().setAmount((transaction.getProduct().getAmount() - transaction.getAmount()));
             remove(transaction.getProduct());
-            return true;
         } else {
-            if (transaction.getProduct().getExpDate().isAfter(LocalDate.now())) {
+            if (transaction.getProduct().getExpDate().isBefore(LocalDate.now())) {
                 int sueCharge = (int) Math.floor(Math.random() * (balance / 2)) + 1;
                 System.out.println("Product is expired customer sued for $" + sueCharge);
                 balance -= sueCharge;
+                remove(transaction.getProduct());
+
             } else {
-                System.out.println(transaction.getFrom().getName() + " does not have enough cash try again later.");
+                System.out.println(transaction.getFrom().getName() + " does not have enough cash they left.");
+
             }
-            return false;
+
         }
     }
 
