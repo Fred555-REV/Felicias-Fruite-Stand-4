@@ -45,10 +45,10 @@ public class Store {
                 transactionHistory.add(transaction);
                 transactionsToRemove.add(transaction);
             } else if (transaction.getFrom().getName().equals(cashier.getName())) {
-                (buy(transaction.getProduct())) {
-                    transactionHistory.add(transaction);
-                    transactionsToRemove.add(transaction);
-                }
+                buy(transaction.getProduct());
+                transactionHistory.add(transaction);
+                transactionsToRemove.add(transaction);
+
             }
         }
         pendingTransactions.removeAll(transactionsToRemove);
@@ -107,14 +107,12 @@ public class Store {
         }
     }
 
-    private boolean buy(Product product) {
+    private void buy(Product product) {
         if (product.getCost() > balance) {
             System.out.println("Not enough money to buy \nname:" + product.getName() + "\ntype:" + product.getType());
-            return false;
         } else {
             setBalance(balance - product.getCost());
             add(product);
-            return true;
         }
     }
 
