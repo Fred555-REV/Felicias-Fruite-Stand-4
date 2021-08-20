@@ -6,7 +6,7 @@ import java.util.Date;
 public class Meat extends Product {
     private String cookLevel;   //raw,rare,wellDone
 
-    public Meat(String name, String type, LocalDate expDate, double cost, int amount, String cookLevel) {
+    protected Meat(String name, String type, LocalDate expDate, double cost, int amount, String cookLevel) {
         super(name, type, expDate, cost, amount);
         this.cookLevel = cookLevel;
     }

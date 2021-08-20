@@ -1,5 +1,7 @@
 package fruit.stand.people;
 
+import fruit.stand.Transaction;
+
 public class Person {
     protected String name;
     protected double cash;
@@ -21,11 +23,11 @@ public class Person {
         this.cash = cash;
     }
 
-    public boolean pay(double amount) {
-        if (amount > cash) {
+    public boolean pay(Transaction transaction) {
+        if (transaction.getFrom().getName().equals(name) && transaction.getAmount() > cash) {
             return false;
         }
-        setCash(cash - amount);
+        setCash(cash - transaction.getAmount());
         return true;
     }
 }

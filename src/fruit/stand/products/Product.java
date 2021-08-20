@@ -10,7 +10,7 @@ public class Product {
     protected double cost;
     protected int amount;
 
-    public Product(String name, String type, LocalDate expDate, double cost, int amount) {
+    protected Product(String name, String type, LocalDate expDate, double cost, int amount) {
         this.name = name;
         this.type = type;
         this.expDate = expDate;

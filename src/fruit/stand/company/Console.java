@@ -4,6 +4,7 @@ import fruit.stand.Transaction;
 import fruit.stand.Validation;
 import fruit.stand.people.Cashier;
 import fruit.stand.people.Customer;
+import fruit.stand.products.Farm;
 import fruit.stand.products.Fruit;
 import fruit.stand.products.Meat;
 import fruit.stand.products.Product;
@@ -115,7 +116,7 @@ public class Console {
     }
 
     private void takeOrder() {
-        int customerIndex = (int) Math.floor(Math.random() * 3);
+        int customerIndex = (int) Math.floor(Math.random() * customers.size());
         Customer current = customers.get(customerIndex);
         System.out.println(current);
         int productType = (int) Math.floor(Math.random() * 2) + 1;
@@ -127,7 +128,7 @@ public class Console {
                 if (store.getFruits().size() > 0) {
                     randomIndex = (int) Math.floor(Math.random() * store.getFruits().size());
                     product = store.getFruits().get(randomIndex);
-                    product = new Fruit(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getFruits().get(randomIndex).getColor());
+//                    product = new Fruit(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getFruits().get(randomIndex).getColor());
                     amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
                     System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + (product.getCost() * store.getPricePercent()));
                 } else {
@@ -138,7 +139,7 @@ public class Console {
                 if (store.getMeats().size() > 0) {
                     randomIndex = (int) Math.floor(Math.random() * store.getMeats().size());
                     product = store.getMeats().get(randomIndex);
-                    product = new Meat(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getMeats().get(randomIndex).getCookLevel());
+//                    product = new Meat(product.getName(), product.getType(), product.getExpDate(), product.getCost(), product.getAmount(), store.getMeats().get(randomIndex).getCookLevel());
                     amount = (int) Math.floor(Math.random() * product.getAmount()) + 1;
                     System.out.println(current.getName() + " orders " + amount + " " + product.getName() + " for $" + (product.getCost() * store.getPricePercent()));
                 } else {

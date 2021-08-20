@@ -1,4 +1,4 @@
-package fruit.stand.company;
+package fruit.stand.products;
 
 import fruit.stand.people.Farmer;
 import fruit.stand.products.Fruit;
@@ -51,25 +51,25 @@ public class Farm {
         return meats.get(index);
     }
 
-    protected List<Fruit> getFruits() {
+    public List<Fruit> getFruits() {
         return fruits;
     }
 
-    protected void displayFruits() {
+    public void displayFruits() {
         for (Fruit fruit : fruits) {
             System.out.printf("Name: %s\tType: %s\tCost: %s\tColor: %s\n",
                     fruit.getName(), fruit.getType(), fruit.getCost(), fruit.getColor());
         }
     }
 
-    protected void displayMeats() {
+    public void displayMeats() {
         for (Meat meat : meats) {
             System.out.printf("Name: %s\tType: %s\tCost: %s\tCookLevel: %s\n",
                     meat.getName(), meat.getType(), meat.getCost(), meat.getCookLevel());
         }
     }
 
-    protected List<Meat> getMeats() {
+    public List<Meat> getMeats() {
         return meats;
     }
 

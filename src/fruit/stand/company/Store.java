@@ -41,7 +41,7 @@ public class Store {
         List<Transaction> transactionsToRemove = new ArrayList<>();
         for (Transaction transaction : pendingTransactions) {
             if (transaction.getTo().getName().equals(cashier.getName())) {
-                if (sell(transaction.getProduct(), transaction.getFrom(), transaction.getAmount())) {
+                if (sell(transaction)) {
                     transactionHistory.add(transaction);
                     transactionsToRemove.add(transaction);
                 }
@@ -59,20 +59,20 @@ public class Store {
         pendingTransactions.add(transaction);
     }
 
-    private Boolean sell(Product product, Person person, double cost) {
-        if (person.pay(product.getCost()) && product.getExpDate().isAfter(LocalDate.now())) {
-            setBalance(balance + product.getCost());
+    private Boolean sell(Transaction transaction) {
+        if (transaction.getFrom().pay(transaction) && transaction.getProduct().getExpDate().isAfter(LocalDate.now())) {
+            setBalance(balance + transaction.getProduct().getCost());
             //how much the customer paid divided by how much it costs = amount
-            product.setAmount((int) (cost / product.getCost()));
-            remove(product);
+            transaction.getProduct().setAmount((int) (transaction.getAmount() / transaction.getProduct().getCost()));
+            remove(transaction.getProduct());
             return true;
         } else {
-            if (product.getExpDate().isAfter(LocalDate.now())) {
+            if (transaction.getProduct().getExpDate().isAfter(LocalDate.now())) {
                 int sueCharge = (int) Math.floor(Math.random() * (balance / 2)) + 1;
                 System.out.println("Product is expired customer sued for $" + sueCharge);
                 balance -= sueCharge;
             } else {
-                System.out.println(person.getName() + " does not have enough cash try again later.");
+                System.out.println(transaction.getFrom().getName() + " does not have enough cash try again later.");
             }
             return false;
         }

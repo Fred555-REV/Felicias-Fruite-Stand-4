@@ -1,14 +1,11 @@
 package fruit.stand;
 
 import fruit.stand.company.Console;
-import fruit.stand.company.Farm;
+import fruit.stand.products.Farm;
 import fruit.stand.company.Store;
 import fruit.stand.people.Cashier;
 import fruit.stand.people.Customer;
-import fruit.stand.products.Fruit;
 
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 public class Main {
