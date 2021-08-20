@@ -151,7 +151,7 @@ public class Console {
                 break;
         }
         if (product != null) {
-            store.addTransaction(new Transaction(((product.getCost() * store.getPricePercent()) * amount), current, cashier, product));
+            store.addTransaction(new Transaction(amount, current, cashier, product));
         }
     }
 
@@ -181,7 +181,7 @@ public class Console {
             System.out.println("Store has $" + store.getBalance());
             int amount = Validation.inputInt("How many 1-10?", 1, 10);
             product.setAmount(amount);
-            store.addTransaction(new Transaction(product.getCost() * amount, cashier, farm.getFarmer(), product));
+            store.addTransaction(new Transaction(amount, cashier, farm.getFarmer(), product));
         }
     }
 

@@ -24,7 +24,7 @@ public class Person {
     }
 
     public boolean pay(Transaction transaction) {
-        if (transaction.getFrom().getName().equals(name) && transaction.getAmount() > cash) {
+        if (transaction.getFrom().getName().equals(name) && transaction.getProduct().getCost() * transaction.getAmount() > cash) {
             return false;
         }
         setCash(cash - transaction.getAmount());

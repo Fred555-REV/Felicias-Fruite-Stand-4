@@ -63,7 +63,7 @@ public class Store {
         if (transaction.getFrom().pay(transaction) && transaction.getProduct().getExpDate().isAfter(LocalDate.now())) {
             setBalance(balance + transaction.getProduct().getCost());
             //how much the customer paid divided by how much it costs = amount
-            transaction.getProduct().setAmount((int) (transaction.getAmount() / transaction.getProduct().getCost()));
+            transaction.getProduct().setAmount((transaction.getProduct().getAmount() - transaction.getAmount()));
             remove(transaction.getProduct());
             return true;
         } else {

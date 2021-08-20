@@ -4,19 +4,19 @@ import fruit.stand.people.Person;
 import fruit.stand.products.Product;
 
 public class Transaction {
-    private double amount;
+    private int amount;
     private Person from;
     private Person to;
     private Product product;
 
-    public Transaction(double amount, Person from, Person to, Product product) {
+    public Transaction(int amount, Person from, Person to, Product product) {
         this.amount = amount;
         this.from = from;
         this.to = to;
         this.product = product;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
