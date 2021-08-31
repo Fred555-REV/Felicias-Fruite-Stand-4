@@ -4,9 +4,9 @@ import fruit.stand.company.Transaction;
 
 public class Person {
     protected String name;
-    protected double cash;
+    protected int cash;
 
-    public Person(String name, double cash) {
+    public Person(String name, int cash) {
         this.name = name;
         this.cash = cash;
     }

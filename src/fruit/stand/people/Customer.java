@@ -1,7 +1,7 @@
 package fruit.stand.people;
 
 public class Customer extends Person {
-    public Customer(String name, double cash) {
+    public Customer(String name, int cash) {
         super(name, cash);
     }
 

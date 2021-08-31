@@ -1,16 +1,16 @@
 package fruit.stand.products;
 
+import Util.Formatter;
 import java.time.LocalDate;
-import java.util.Date;
 
-public class Product {
+public abstract class Product {
     protected String name;
     protected String type; //specific is like gala or wing
     protected LocalDate expDate;
-    protected double cost;
+    protected int cost;
     protected int amount;
 
-    protected Product(String name, String type, LocalDate expDate, double cost, int amount) {
+    protected Product(String name, String type, LocalDate expDate, int cost, int amount) {
         this.name = name;
         this.type = type;
         this.expDate = expDate;
@@ -22,7 +22,7 @@ public class Product {
         return expDate;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 
@@ -48,7 +48,7 @@ public class Product {
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", expDate=" + expDate +
-                ", cost=" + cost +
+                ", cost=" + Formatter.getDisplayPrice(cost) +
                 ", amount=" + amount +
                 '}';
     }

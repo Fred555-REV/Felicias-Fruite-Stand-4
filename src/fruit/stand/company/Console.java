@@ -6,6 +6,7 @@ import fruit.stand.people.Customer;
 import fruit.stand.products.Farm;
 import fruit.stand.products.Product;
 
+import Util.Formatter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
@@ -52,7 +53,7 @@ public class Console {
         } else {
             System.out.println("There are " + store.pendingTransactions.size() + " transactions pending.");
         }
-        System.out.println("The Fruite Stand has $" + store.getBalance());
+        System.out.println("The Fruite Stand has " + Formatter.getDisplayPrice(store.getBalance()));
         if (hour == 5 || isShiftOver) {
             isShiftOver = true;
             System.out.println("(0) You can end your shift now.");
@@ -154,7 +155,7 @@ public class Console {
 
     private void buyProduct() {
         System.out.println("Which product would you like to order? (F)ruit/(M)eat");
-        System.out.println("Store has $" + store.getBalance());
+        System.out.println("Store has " + Formatter.getDisplayPrice(store.getBalance()));
         String input = scan.next();
         Product product;
         int choice;

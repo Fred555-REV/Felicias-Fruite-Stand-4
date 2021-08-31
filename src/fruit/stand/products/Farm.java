@@ -17,27 +17,27 @@ public class Farm {
         farmer = new Farmer("Jake", 777);
         this.fruits = new ArrayList<>();
         this.meats = new ArrayList<>();
-        addFruit("Apple", "Gala", 2.5, "Red");
-        addFruit("Apple", "Fuji", 1.5, "Red");
-        addFruit("Orange", "Blood", 1.75, "Red-Orange");
-        addFruit("Orange", "Cara Cara", 2, "Orange");
-        addFruit("Grape", "Concord", 1.75, "Purple");
-        addFruit("Grape", "Thompson", 2, "Green");
-        addMeat("Chicken", "Thigh", 5.75, "raw");
-        addMeat("Chicken", "Breast", 6, "charred");
-        addMeat("Steak", "Flank", 5.25, "Well Done");
-        addMeat("Steak", "Shaved", 7, "Rare");
-        addMeat("Pork", "Shoulder", 4.5, "Medium Rare");
-        addMeat("Pork", "Chop", 6.25, "Medium Well");
+        addFruit("Apple", "Gala", 2_50, "Red");
+        addFruit("Apple", "Fuji", 1_50, "Red");
+        addFruit("Orange", "Blood", 1_75, "Red-Orange");
+        addFruit("Orange", "Cara Cara", 2_00, "Orange");
+        addFruit("Grape", "Concord", 1_75, "Purple");
+        addFruit("Grape", "Thompson", 2_00, "Green");
+        addMeat("Chicken", "Thigh", 5_75, "raw");
+        addMeat("Chicken", "Breast", 6_00, "charred");
+        addMeat("Steak", "Flank", 5_25, "Well Done");
+        addMeat("Steak", "Shaved", 7_00, "Rare");
+        addMeat("Pork", "Shoulder", 4_50, "Medium Rare");
+        addMeat("Pork", "Chop", 6_25, "Medium Well");
     }
 
-    private void addFruit(String name, String type, double cost, String color) {
+    private void addFruit(String name, String type, int cost, String color) {
         fruits.add(new Fruit(name, type,
                 LocalDate.of(2020, 8, (int) (Math.floor(Math.random() * 7) + 18)),
                 cost, 1, color));
     }
 
-    private void addMeat(String name, String type, double cost, String cookLevel) {
+    private void addMeat(String name, String type, int cost, String cookLevel) {
         meats.add(new Meat(name, type,
                 LocalDate.of(2020, 8, (int) (Math.floor(Math.random() * 7) + 18)),
                 cost, 1, cookLevel));

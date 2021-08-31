@@ -12,14 +12,14 @@ import java.util.Locale;
 
 public class Store {
     private Cashier cashier;
-    private double balance;
+    private int balance;
     private final List<Fruit> fruits;
     private final List<Meat> meats;
     protected List<Transaction> pendingTransactions;
     private final List<Transaction> transactionHistory;
     private final double pricePercent;
 
-    public Store(double balance) {
+    public Store(int balance) {
         this.balance = balance;
         this.fruits = new ArrayList<>();
         this.meats = new ArrayList<>();
@@ -118,7 +118,7 @@ public class Store {
         this.cashier = cashier;
     }
 
-    private void setBalance(double balance) {
+    private void setBalance(int balance) {
         this.balance = balance;
     }
 
@@ -155,7 +155,7 @@ public class Store {
         return fruits;
     }
 
-    protected double getBalance() {
+    protected int getBalance() {
         return balance;
     }
 
