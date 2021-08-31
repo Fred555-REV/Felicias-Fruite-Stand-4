@@ -158,4 +158,8 @@ public class Store {
     protected double getBalance() {
         return balance;
     }
+
+    public Cashier getCashier() {
+        return cashier;
+    }
 }
